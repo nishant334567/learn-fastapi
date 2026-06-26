@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from core.embed import text_embedding
 from core.chunker import chunk_text
 from core.db import get_db
+from core.vectorstore import vectorstore
 
 router = APIRouter()
 
@@ -20,15 +21,15 @@ def train_data(trainingData: TrainingData, conn=Depends(get_db)):
         (trainingData.full_content, trainingData.title)
     )
     doc_id = cursor.fetchone()[0]
+    conn.commit()
 
     # 2. Chunk → embed → save each chunk
     chunks = chunk_text(trainingData.full_content)
-    for chunk in chunks:
-        embedding = text_embedding(chunk)
-        cursor.execute(
-            'INSERT INTO knowledge_chunks (docid, chunk_content, embed) VALUES (%s, %s, %s)',
-            (doc_id, chunk, embedding)
-        )
-
-    conn.commit()
+    # for chunk in chunks:
+    #     embedding = text_embedding(chunk)
+    #     cursor.execute(
+    #         'INSERT INTO knowledge_chunks (docid, chunk_content, embed) VALUES (%s, %s, %s)',
+    #         (doc_id, chunk, embedding)
+    #     )
+    vectorstore.add_texts(chunks, metadatas=[{"doc_id":doc_id}]*len(chunks))
     return {"message": "Document trained successfully", "id": doc_id, "chunks": len(chunks)}
