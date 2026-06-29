@@ -1,5 +1,6 @@
-from fastapi import APIRouter
+from fastapi import APIRouter,Depends
 from pydantic import BaseModel
+from core.db import get_db
 
 router = APIRouter()
 
@@ -9,8 +10,12 @@ class Item(BaseModel):
     price:int
 
 @router.get("/items")
-def get_items():
-    return {items: []}
+def get_items(conn=Depends(get_db)):
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM users')
+    users = cursor.fetchall()
+    print(cursor)
+    return {"users": users}
 
 @router.post("/items")
 def add_items(item:Item):
