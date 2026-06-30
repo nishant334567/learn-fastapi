@@ -11,3 +11,4 @@ def find_documents_for_question(query:str)->list[{"document_id":str,"document_na
     docs_list = [{'document_id':doc.metadata['document_id'],'document_name':doc.metadata['document_name']} for doc in docs]
     return docs_list
 
+@tool
