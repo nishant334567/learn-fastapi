@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from routers import items, knowledge_base, query
+from routers import agents, items, knowledge_base, query
 from core.vectorstore import vectorstore
 
 @asynccontextmanager
@@ -10,6 +10,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.include_router(agents.router)
 app.include_router(items.router)
 app.include_router(knowledge_base.router)
 app.include_router(query.router)

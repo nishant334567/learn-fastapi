@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
+from langchain_core.messages import HumanMessage
 from core.vectorstore import vectorstore
 from fastapi.responses import StreamingResponse
 from core.graph import app as graph
@@ -11,8 +12,8 @@ class Query(BaseModel):
 
 @router.post("/query")
 def answer_query(query: Query):
-    result = graph.invoke({"question": query.user_question, "chunks": [], "answer": ""})
-    return {"llm_answer": result["answer"]}
+    result = graph.invoke({"messages": [HumanMessage(content=query.user_question)]})
+    return {"llm_answer": result["messages"][-1].content}
 
 @router.post("/query/stream")
 def stream_answer_query(query: Query):

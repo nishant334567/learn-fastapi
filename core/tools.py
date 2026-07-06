@@ -12,3 +12,9 @@ def find_documents_for_question(query:str)->list[{"document_id":str,"document_na
     return docs_list
 
 @tool
+def search_knowledge_base(query:str)->str:
+    """Use when the user asks a factual question that needs document content."""
+    docs = vectorstore.similarity_search(query, k=10)
+    if not docs:
+        return "No relavant information found in the knowledge base. Please try again with a different query."
+    return "\n".join([doc.page_content for doc in docs])
