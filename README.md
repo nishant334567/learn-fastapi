@@ -1,45 +1,45 @@
-# Learning FastAPI
+# Job Apply LangGraph API
 
-A hands-on project where I learn FastAPI by building an agentic RAG (Retrieval-Augmented Generation) API step by step.
+FastAPI + LangGraph pipeline that scores a resume against a job description and drafts a cover letter when the fit is strong enough.
 
-## Progress
+## Flow
 
-- [x] Basic FastAPI app with a health check route
-- [x] Pydantic models for request validation
-- [x] APIRouter — splitting routes across multiple files
+```
+POST /agent/apply { jd, resume }
+  → parse_jd
+  → parse_resume
+  → score_fit
+  → score < 50? → reject
+  → else → draft_cover
+```
 
 ## Project Structure
 
 ```
-agentic-rag-fastapi/
-├── main.py          # App entry point, root route
-├── routers/
-│   └── items.py     # Items routes (GET, POST /items)
-└── README.md
+├── main.py
+├── core/
+│   └── job_graph.py   # LangGraph pipeline
+└── routers/
+    └── agents.py      # POST /agent/apply
 ```
 
 ## Run Locally
 
 ```bash
-# Create and activate virtual environment
 python3 -m venv venv
 source venv/bin/activate
-
-# Install dependencies
-pip install fastapi uvicorn
-
-# Start the server
+pip install fastapi uvicorn langchain-ollama langchain-core langgraph
+# Ollama must be running with gemma4 pulled
 uvicorn main:app --reload
 ```
 
-Server runs at `http://127.0.0.1:8000`
+Server: `http://127.0.0.1:8000`  
+Docs: `http://127.0.0.1:8000/docs`
 
-## API Routes
+## Test
 
-| Method | URL | Description |
-|--------|-----|-------------|
-| GET | `/` | Health check |
-| GET | `/items` | List items |
-| POST | `/items` | Create an item |
-
-Interactive docs available at `http://127.0.0.1:8000/docs`
+```bash
+curl -X POST http://127.0.0.1:8000/agent/apply \
+  -H "Content-Type: application/json" \
+  -d '{"jd":"Python, FastAPI required","resume":"Python dev, 2 years FastAPI"}'
+```
