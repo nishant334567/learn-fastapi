@@ -31,7 +31,9 @@ async def parse_jd_node(state: JobState):
 
 async def parse_resume_node(state: JobState):
     prompt = ChatPromptTemplate.from_template(
-        "Extract technical skills from this resume. "
+        "Extract technical skills the candidate clearly has with real experience. "
+        "Do NOT include skills they lack, are learning, or only mention as missing "
+        "(e.g. 'no AWS', 'limited Docker', 'not yet'). "
         "Return ONLY a JSON array of strings. No explanation.\n\n"
         "Resume: {resume_text}"
     )
@@ -40,18 +42,18 @@ async def parse_resume_node(state: JobState):
     return {"resume_skills": skills}
 
 
+def _normalize_skills(skills: list[str]) -> set[str]:
+    return {s.strip().lower() for s in skills if s}
+
+
 async def score_fit_node(state: JobState):
-    prompt = ChatPromptTemplate.from_template(
-        "Score the fit between the job description skills and the resume skills. "
-        "Return ONLY a number between 0 and 100. No explanation.\n\n"
-        "Job Description Skills: {jd_skills}\n"
-        "Resume Skills: {resume_skills}"
-    )
-    chain = prompt | llm | StrOutputParser()
-    result = await chain.ainvoke(
-        {"jd_skills": state["jd_skills"], "resume_skills": state["resume_skills"]}
-    )
-    return {"score": int(result.strip())}
+    jd_skills = _normalize_skills(state["jd_skills"])
+    resume_skills = _normalize_skills(state["resume_skills"])
+    if not jd_skills:
+        return {"score": 0}
+    matched = jd_skills & resume_skills
+    score = round(100 * len(matched) / len(jd_skills))
+    return {"score": score}
 
 
 async def draft_cover_node(state: JobState):

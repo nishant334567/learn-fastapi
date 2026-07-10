@@ -1,0 +1,142 @@
+[
+  {
+    "id": "strong_python_fastapi",
+    "jd": "Looking for a backend engineer with strong Python and FastAPI experience. Must know REST APIs and PostgreSQL.",
+    "resume": "Backend developer with 3 years of Python. Built production APIs with FastAPI and PostgreSQL. Comfortable with REST design.",
+    "expected": {
+      "should_draft": true,
+      "score_min": 70
+    }
+  },
+  {
+    "id": "strong_react_frontend",
+    "jd": "Frontend engineer needed. Required: React, TypeScript, CSS, and experience with responsive UI.",
+    "resume": "Frontend developer, 4 years React and TypeScript. Built responsive dashboards with modern CSS. Strong UI focus.",
+    "expected": {
+      "should_draft": true,
+      "score_min": 70
+    }
+  },
+  {
+    "id": "strong_devops",
+    "jd": "DevOps engineer role. Must have Docker, Kubernetes, AWS, and CI/CD experience.",
+    "resume": "DevOps engineer with 5 years experience. Daily work with Docker, Kubernetes, AWS, and GitHub Actions CI/CD pipelines.",
+    "expected": {
+      "should_draft": true,
+      "score_min": 75
+    }
+  },
+  {
+    "id": "strong_data_engineer",
+    "jd": "Data engineer position requiring Python, Spark, SQL, and Airflow.",
+    "resume": "Data engineer, 3 years. Built ETL pipelines with Python, Spark, SQL, and Airflow in production.",
+    "expected": {
+      "should_draft": true,
+      "score_min": 70
+    }
+  },
+  {
+    "id": "partial_python_missing_cloud",
+    "jd": "Python backend role requiring FastAPI, PostgreSQL, Docker, and AWS.",
+    "resume": "Python developer with FastAPI and PostgreSQL experience. Limited exposure to Docker; no AWS experience yet.",
+    "expected": {
+      "should_draft": true,
+      "score_min": 50,
+      "score_max": 85
+    }
+  },
+  {
+    "id": "partial_frontend_missing_ts",
+    "jd": "Need React, TypeScript, Next.js, and GraphQL experience.",
+    "resume": "React developer with Next.js projects. Mostly JavaScript so far; learning TypeScript. No GraphQL yet.",
+    "expected": {
+      "should_draft": true,
+      "score_min": 45,
+      "score_max": 80
+    }
+  },
+  {
+    "id": "partial_fullstack_overlap",
+    "jd": "Full-stack engineer: Node.js, React, MongoDB, and Redis required.",
+    "resume": "Full-stack developer skilled in Node.js and React. Used MongoDB on two projects. No Redis experience.",
+    "expected": {
+      "should_draft": true,
+      "score_min": 55,
+      "score_max": 90
+    }
+  },
+  {
+    "id": "weak_designer_vs_java",
+    "jd": "Senior Java engineer with Spring Boot, Kubernetes, and AWS required.",
+    "resume": "Graphic designer with 5 years Photoshop, Illustrator, and branding. No programming experience.",
+    "expected": {
+      "should_draft": false,
+      "score_max": 30
+    }
+  },
+  {
+    "id": "weak_sales_vs_ml",
+    "jd": "Machine learning engineer. Required: Python, PyTorch, NLP, and MLOps.",
+    "resume": "Sales manager with CRM experience, negotiation skills, and team leadership. No coding background.",
+    "expected": {
+      "should_draft": false,
+      "score_max": 25
+    }
+  },
+  {
+    "id": "weak_php_vs_golang",
+    "jd": "Golang backend engineer. Must know Go, gRPC, and microservices.",
+    "resume": "PHP developer focused on WordPress and Laravel. Familiar with MySQL and basic JavaScript.",
+    "expected": {
+      "should_draft": false,
+      "score_max": 40
+    }
+  },
+  {
+    "id": "weak_junior_vs_senior_reqs",
+    "jd": "Staff engineer: 10+ years distributed systems, Java, Kafka, and system design leadership.",
+    "resume": "Junior developer, 6 months experience with HTML, CSS, and basic Python tutorials.",
+    "expected": {
+      "should_draft": false,
+      "score_max": 35
+    }
+  },
+  {
+    "id": "borderline_one_skill_match",
+    "jd": "Need Java, Spring Boot, Kafka, and Elasticsearch.",
+    "resume": "Backend developer with solid Java experience. No Spring Boot, Kafka, or Elasticsearch yet.",
+    "expected": {
+      "should_draft": false,
+      "score_min": 20,
+      "score_max": 55
+    }
+  },
+  {
+    "id": "borderline_related_skills",
+    "jd": "Looking for React Native mobile developer with TypeScript and Redux.",
+    "resume": "React web developer with TypeScript and Redux. Built SPAs, not mobile apps yet. Interested in React Native.",
+    "expected": {
+      "should_draft": true,
+      "score_min": 45,
+      "score_max": 75
+    }
+  },
+  {
+    "id": "emptyish_resume",
+    "jd": "Python engineer with Django and PostgreSQL.",
+    "resume": "Recent graduate. Eager to learn. Completed a few online courses.",
+    "expected": {
+      "should_draft": false,
+      "score_max": 40
+    }
+  },
+  {
+    "id": "overqualified_exact_match",
+    "jd": "Entry-level Python developer. Familiarity with FastAPI is a plus.",
+    "resume": "Senior Python engineer, 8 years. Led FastAPI microservices, mentored juniors, designed APIs at scale.",
+    "expected": {
+      "should_draft": true,
+      "score_min": 80
+    }
+  }
+]
